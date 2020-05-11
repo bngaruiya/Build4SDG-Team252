@@ -1,0 +1,43 @@
+{
+  "name": "crop-dpa",
+  "version": "1.0.0",
+  "description": "The team is building a crop disease classification application. The application uses a resnet-152 to classify 15 different crop disease categories based on images obtained from the plant village Dataset.\r The classifier can be found at this [Crop Disease Classifier Repo](https://github.com/bngaruiya/CropDiseaseClassifier).",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch ./API/frontend/src/index.js --output ./API/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./API/frontend/src/index.js --output ./API/frontend/static/frontend/main.js"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bngaruiya/Build4SDG-Team252.git"
+  },
+  "author": "Bernard Ngaruiya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bngaruiya/Build4SDG-Team252/issues"
+  },
+  "homepage": "https://github.com/bngaruiya/Build4SDG-Team252#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-alert": "^7.0.0",
+    "react-alert-template-basic": "^1.0.0",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-transition-group": "^4.4.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
+  }
+}
