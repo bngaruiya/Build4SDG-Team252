@@ -15,4 +15,8 @@ Clone this repository. Navigate to the PredictAPI. Under this is a class_models 
     `cd API`
 -Start the django server by running 
     `python manage.py runserver`
--
+
+### Testing the API
+- Navigate to `localhost/api/predict`. It should give you an option to upload an image. Note: Dont Fill the prediction column. This will be populated by the model. Later on I will get rid of this column. 
+- Download an image of a plant leaf suffering from any of the disease classes defined in the classes.json file.
+- Upload it to the server for classification and confirm that the classification is correct.

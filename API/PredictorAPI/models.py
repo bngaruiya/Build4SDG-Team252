@@ -30,7 +30,7 @@ def classify(image):
     with torch.no_grad():
         output = prediction_model(img_tensor)
         pred = torch.argmax(output).item()
-    if(pred > 5.0):
+    if(pred > 1.0):
         classes = load_class_names()
         prediction = classes[pred]
     else:
