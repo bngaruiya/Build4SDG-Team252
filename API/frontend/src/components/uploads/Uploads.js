@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUploads } from '../../actions/uploads';
+import { getUploads, deleteUpload } from '../../actions/uploads';
 
 export class Uploads extends Component {
     static propTypes = {
@@ -21,7 +21,7 @@ export class Uploads extends Component {
                         <div className="card-body">
                             <p className="card-text">The image above is of {upload.prediction} disease.</p>
                         </div>
-                        <button className="btn btn-danger btn-sm">Delete</button>
+                        <button onClick={this.props.deleteUpload.bind(this, upload.id)} className="btn btn-danger btn-sm">Delete</button>
                     </div>
                 ))}
             </Fragment>
@@ -33,4 +33,4 @@ const mapStateToProps = state => ({
     uploads: state.uploads.uploads
 });
 
-export default connect(mapStateToProps, { getUploads })(Uploads);
+export default connect(mapStateToProps, { getUploads, deleteUpload })(Uploads);
