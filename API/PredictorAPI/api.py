@@ -9,5 +9,12 @@ class PredictViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny
     ]
-
+    
     serializer_class = ImageUploadSerializer
+
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return ImageUploads.objects.filter(owner=user)
+
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)

@@ -10,6 +10,8 @@ pytest = "*"
 pytest-django = "*"
 psycopg2 = "*"
 python-decouple = "*"
+mixer = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.6"

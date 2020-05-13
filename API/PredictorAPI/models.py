@@ -1,5 +1,6 @@
 from django.db import models as djangoModel
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 import os
 import torch
@@ -9,18 +10,23 @@ from torchvision import models, transforms
 from torch import nn
 from collections import OrderedDict
 
+# Instantiate a user model
+User = get_user_model()
+
 # Create your models here.
 class ImageUploads(djangoModel.Model):
     image = djangoModel.ImageField(upload_to='pred_images')
     prediction = djangoModel.CharField(max_length=100, blank=True, null=True)
+    created_at = djangoModel.DateTimeField(auto_now_add=True)
+    owner = djangoModel.ForeignKey(User, related_name="user_image_uploads", on_delete=djangoModel.CASCADE)
 
     def save(self, *args, **kwargs):
         self.prediction = classify(self.image)
         print('Done classifying Image')
         super(ImageUploads, self).save(*args, **kwargs)
 
-    # def __str__(self):
-    #     return self.prediction
+    def __str__(self):
+        return self.image.url
 
 def classify(image):
     img = Image.open(image).convert('RGB')
@@ -30,12 +36,13 @@ def classify(image):
     with torch.no_grad():
         output = prediction_model(img_tensor)
         pred = torch.argmax(output).item()
-    if(pred > 1.0):
+        target = torch.max(output).numpy()
+    if(target < 4.0):
+        prediction = "Unknown"
+    else:
         classes = load_class_names()
         prediction = classes[pred]
-    else:
-        prediction = "Unknown"
-    print(pred)
+    print(target)
     return prediction
 
 def load_model():
