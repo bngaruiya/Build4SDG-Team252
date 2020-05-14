@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { GET_UPLOADS, DELETE_UPLOAD, ADD_UPLOAD } from './types';
+import { createMessage, returnErrors } from './messages';
 
 // Get Uploads
 export const getUploads = () => dispatch => {
@@ -11,19 +12,26 @@ export const getUploads = () => dispatch => {
                 payload: res.data
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => dispatch(returnErrors(
+            err.response.data,
+            err.response.status
+        )));
 }
 
 // Delete Uploads
 export const deleteUpload = (id) => dispatch => {
     axios.delete(`/api/predict/${id}`)
         .then(res => {
+            dispatch(createMessage({ deleteUpload: "Image File Deleted" }))
             dispatch({
                 type: DELETE_UPLOAD,
                 payload: id
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => dispatch(returnErrors(
+            err.response.data,
+            err.response.status
+        )));
 }
 
 //Add Upload
@@ -34,10 +42,14 @@ export const addUpload = (upload) => dispatch => {
         }
     })
         .then(res => {
+            dispatch(createMessage({ addUpload: "Image File Uploaded for Inference!" }))
             dispatch({
                 type: ADD_UPLOAD,
                 payload: res.data
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => dispatch(returnErrors(
+            err.response.data,
+            err.response.status
+        )));
 }

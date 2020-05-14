@@ -1,7 +1,7 @@
 import React from 'react';
 
-import UploadForm from './Uploads';
-import Uploads from './UploadForm';
+import Uploads from './Uploads';
+import UploadForm from './UploadForm';
 
 const DashBoard = () => {
     return (

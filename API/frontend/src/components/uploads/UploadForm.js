@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 import { addUpload } from '../../actions/Uploads';
 
-export class Upload_Form extends Component {
+export class UploadForm extends Component {
     state = {
-        image: null,
-        // owner: 2
+        image: null
     }
 
     static propTypes = {
@@ -18,20 +17,15 @@ export class Upload_Form extends Component {
         this.setState({ image: e.target.files[0] })
     };
 
-    onChange = e => {
-        this.setState({ 'owner': e.target.defaultValue })
-    }
-
     onSubmit = e => {
         e.preventDefault();
         let upload = new FormData();
         upload.append('image', this.state.image, this.state.image.name);
-        upload.append("owner", 2)
-        this.props.addUpload(upload)
+        this.props.addUpload(upload);
     }
 
     render() {
-        const { image, owner } = this.state;
+        const { image } = this.state;
         return (
             <div className="card card-body mt-4 mb-4">
                 <h2>Add File for Prediction</h2>
@@ -48,16 +42,6 @@ export class Upload_Form extends Component {
                         ></input>
                     </div>
                     <div className="form-group">
-                        <label>Owner</label>
-                        <input 
-                            className="form-control"
-                            type="int"
-                            name="owner"
-                            onChange={this.onChange}
-                            defaultValue={owner}
-                        ></input>
-                    </div>
-                    <div className="form-group">
                         <button type="submit" className="btn btn-primary">
                             Submit
                         </button>
@@ -68,5 +52,5 @@ export class Upload_Form extends Component {
     }
 }
 
-export default connect(null, { addUpload })(Upload_Form);
+export default connect(null, { addUpload })(UploadForm);
 
